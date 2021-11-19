@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .form1 {
+        border: 1px solid black;
+        padding: 5px;
+        width: 300px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 50px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px 2px;
+    }
+    h1{
+        text-align: center;
+    }
+    .line1{
+        margin-left: 10px;
+        width: 260px;
+    }
+    button{
+        border-radius: 5px;
+        background-color: turquoise;
+        color: blue;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: yellowgreen;
+        color: white;
+    }
+</style>
+
+<body>
+    <div class="form1">
+        <form name="logform" method="get" action="FormActivity.html" onsubmit="return validateForm()">
+            <h1>Log-In</h1>
+
+            <label for="text" value="Username">Username:</label>
+            <input type="text" name="username" id="username" class="line1"><br><br>
+
+            <label for="password" value="Password">Password:</label>
+            <input type="password" name="password" id="password" class="line1"><br><br>
+
+            <label for="confirmedpassword" value="confirmed">Confirmed <br>Password:</label>
+            <input type="password" name="confirmedpassword" id="confirmedpassword" class="line1"><br><br>
+
+            <label for="text" value="Password">Email:</label>
+            <input type="text" name="email" id="email" class="line1"><br><br>
+
+
+            <button type="submit" name="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        //to check the user validation in using email, use Regular Expression has a pattern if the username have an @ sign is existing
+        //you can also use string manipulation called indexof and +indexof.This string manipulaor check if there is an @ sign and (.) in the user email address. 
+        function validateForm() {
+            //Get a form via a form name 
+            let logForm = document.forms["logform"];
+            let userName = logForm["username"].value.trim();
+            let passWord = logForm["password"].value.trim();
+            let confirmedPassword = logForm["confirmedpassword"].value.trim();
+            let email =  logForm["email"].value.trim();
+
+            if (userName == "") {
+                alert('Please provide username');
+                logForm['username'].focus();
+                return false;
+            }
+            if (passWord.length < 6) {
+                alert('Please provide password atleast 6 character');
+                logForm['password'].focus();
+                return false;
+            }
+            if (confirmedPassword !== passWord) {
+                alert('confirmed password');
+                logForm['confirmedpassword'].focus();
+                return false;
+            }
+            if(email.indexOf('@') == -1){
+                alert('Please provide correct email format');
+                logForm['email'].focus();
+                return false;
+        }
+        if(email.indexOf('.') == -1){
+                alert('Please provide correct email format');
+                logForm['email'].focus();
+                return false;
+        }
+    }
+    //You can use addEventlistener to get input aside from document.getElementBYid and document.forms for submission
+    </script>
+</body>
+
+</html>
